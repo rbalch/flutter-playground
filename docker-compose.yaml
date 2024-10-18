@@ -1,0 +1,25 @@
+services:
+  kastmates-flutter:
+    image: kastmates-flutter
+    container_name: kastmates-flutter
+    build:
+      context: .
+      # target: builder
+    volumes:
+      - .:/app
+      - vscode-server:/root/.vscode-server
+      # - ~/.config/gcloud:/.config/gcloud
+    stdin_open: true
+    tty: true
+    ports:
+      - "8085:8085" 
+    # environment:
+      # GOOGLE_CLOUD_PROJECT: ""
+      # GOOGLE_APPLICATION_CREDENTIALS: '/.config/gcloud/hack_athon_credentials.json'
+    working_dir: /app/startup_namer
+    command: fwr
+
+volumes:
+  vscode-server:
+    name: vscode-server
+    external: true
