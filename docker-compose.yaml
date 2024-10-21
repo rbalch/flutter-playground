@@ -6,7 +6,7 @@ services:
       context: .
       # target: builder
     volumes:
-      - .:/app
+      - .:/code
       - vscode-server:/root/.vscode-server
       # - ~/.config/gcloud:/.config/gcloud
     stdin_open: true
@@ -16,7 +16,7 @@ services:
     # environment:
       # GOOGLE_CLOUD_PROJECT: ""
       # GOOGLE_APPLICATION_CREDENTIALS: '/.config/gcloud/hack_athon_credentials.json'
-    working_dir: /app/startup_namer
+    working_dir: /code/app
     command: fwr
 
 volumes:

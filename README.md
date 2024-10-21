@@ -42,3 +42,12 @@ Sometimes it helps to simply update everything:
 flutter upgrade
 flutter pub get
 ```
+
+### Initial App Setup
+
+This are the steps I took to create the app.
+
+```bash
+flutter create app
+flutter build web
+```

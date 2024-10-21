@@ -1,30 +1,35 @@
 # Install Operating system and dependencies
-FROM ubuntu:20.04 as builder
+FROM ubuntu:20.04 AS builder
 LABEL maintainer="rbalch@hugeinc.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND=dialog
 
-RUN apt-get update 
-RUN apt-get install -y curl \
-                        git \
-                        wget \
-                        unzip \
-                        libgconf-2-4 \
-                        gdb \
-                        libstdc++6 \
-                        libglu1-mesa \
-                        fonts-droid-fallback \
-                        python3 \
-                        clang \
-                        cmake \
-                        ninja-build \
-                        pkg-config \
-                        libgtk-3-dev
-RUN apt-get clean
+# Install tzdata non-interactively
+RUN apt update -y
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+
+RUN apt install --no-install-recommends -y \
+    curl \
+    git \
+    wget \
+    unzip \
+    libgconf-2-4 \
+    gdb \
+    libstdc++6 \
+    libglu1-mesa \
+    fonts-droid-fallback \
+    python3 \
+    clang \
+    cmake \
+    ninja-build \
+    pkg-config \
+    libgtk-3-dev
+
+# RUN apt clean
 
 # Install Chrome
-RUN cd ~ && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install -y ./google-chrome-stable_current_amd64.deb
+RUN cd ~ && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --no-check-certificate && apt install -y ./google-chrome-stable_current_amd64.deb
 
 # download Flutter SDK from Flutter Github repo
 RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
