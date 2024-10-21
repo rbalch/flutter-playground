@@ -8,16 +8,15 @@ services:
     volumes:
       - .:/code
       - vscode-server:/root/.vscode-server
-      # - ~/.config/gcloud:/.config/gcloud
     stdin_open: true
     tty: true
     ports:
-      - "8085:8085" 
-    # environment:
-      # GOOGLE_CLOUD_PROJECT: ""
-      # GOOGLE_APPLICATION_CREDENTIALS: '/.config/gcloud/hack_athon_credentials.json'
+      - "8085:8085" # flutter
+      - "8081:8081" # debug
     working_dir: /code/app
-    command: fwr
+    command: /bin/bash
+    # command: fwr
+    # command: flutter run -d web-server --web-hostname=0.0.0.0 --web-port=8085 --start-paused
 
 volumes:
   vscode-server:

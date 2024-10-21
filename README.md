@@ -1,10 +1,12 @@
-# KastMates Story App
+# Flutter Playground 
 
 ## Getting Started
 
-This project is a flutter application with firebase backend.
+This is my playground for getting a flutter app working via Docker.
 
 For most dev work you can simply use docker and the web interface.
+
+I started working on the vscode launch.json, but it's not working yet.
 
 ### Install
 
@@ -28,6 +30,13 @@ make build
 
 ```bash
 make up
+```
+
+This starts it but it's only running bash. You need to press "r" to hot reload the app, so you'll need to do that in a shell:
+
+```bash
+make command
+fwr
 ```
 
 The app should then be serving from [http://localhost:8085](http://localhost:8085).

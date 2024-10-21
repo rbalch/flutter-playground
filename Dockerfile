@@ -45,21 +45,11 @@ RUN flutter channel master
 RUN flutter upgrade
 RUN flutter config --enable-web
 
-# Install fwr
-RUN wget -c https://github.com/synw/fwr/releases/download/0.2.0/fwr -O /usr/local/flutter/bin/fwr
-RUN chmod +x /usr/local/flutter/bin/fwr
-
 # FROM builder as deploy
-# COPY . .
+WORKDIR /code
+COPY . .
+WORKDIR /code/app
+RUN flutter pub get
 
-WORKDIR /app
-
-# make server startup script executable and start the web server
-# RUN ["chmod", "+x", "/app/server/server.sh"]
-
-# ENTRYPOINT [ "/app/server/server.sh"]
-
-# pip install google-cloud-aiplatform[langchain,reasoningengine]
-# import vertexai
-# vertexai.init( project="PROJECT_ID", location="LOCATION", staging_bucket="gs://BUCKET_NAME")
-# model = "gemini-1.5-pro-001"
+# Add fwr alias to .bashrc for the root user
+RUN echo "alias fwr='flutter run -d web-server --web-hostname=0.0.0.0 --web-port=8085'" >> /root/.bashrc
